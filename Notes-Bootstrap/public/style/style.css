@@ -1,0 +1,53 @@
+:root {
+    --background-color:#FFC700;
+    --bs-primary-rgb : #12296c;
+
+}
+
+body {
+    font-family: 'Poppins',sans-serif;
+    background-color: var(--background-color);
+    color: var(--bs-primary-rgb);
+    font-weight: 300;
+    font-size: 1.2rem;
+    background-image: url('../images/noise-bg.png');
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Unbounded',sans-serif;
+    font-weight: 800;
+}
+
+.container-fluid-custom {
+    max-width: 1600px;
+}
+
+.btn {
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
+    border-radius:2rem ;
+}
+
+/* @media (min-width:1200px){
+    .home {
+        background:
+        url('../images/human-1.svg') left bottom no-repeat,
+        url('../images/human-2.svg') right bottom no-repeat,
+        url('../images/noise-bg.png') left  no-repeat,
+        var(--background-color);
+    }
+} */
+
+.home-title::before{
+    content: url('../images/stars.svg');
+    position: absolute;
+    left: -50px;
+    top: -30px;
+}
+
+.home-title::after {
+    content: url('../images/stars.svg');
+    position: absolute;
+    right: -50px;
+    bottom: -30px;
+}

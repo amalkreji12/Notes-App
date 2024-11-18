@@ -19,7 +19,11 @@
 
 <body>
     <header>
+        {{#if user}}
+        {{>dashboard_header}}
+        {{else}}
         {{>header}}
+        {{/if}}
     </header>
 
     <main>
