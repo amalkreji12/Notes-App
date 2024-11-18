@@ -1,17 +1,20 @@
 require('dotenv').config();
-
 const express = require('express');
 const hbs = require('express-handlebars');
 const cookieParser = require('cookie-parser');
-// const session = require('session');
 const path = require('path');
-
+const db = require('./controller/connection');
+const session = require('express-session');
+const passport = require('passport');
 
 
 const app = express();
 const port = 3000 || process.env.PORT;
 
+db.connect();
+
 var userRouter = require('./routes/user');
+var authRouter = require('./routes/auth');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine','hbs');
@@ -21,9 +24,12 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static('public'))
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 app.use('/',userRouter);
+app.use('/',authRouter);
 
 
 app.get('*',(req,res)=>{
