@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const User =  require('../models/userModel');
+const User = require('../models/userModel');
 
 
 passport.use(new GoogleStrategy({
@@ -16,7 +16,7 @@ passport.use(new GoogleStrategy({
     // });
     //console.log(profile);
 
-    
+
     const newUser = {
       googleId: profile.id,
       displayName: profile.displayName,
@@ -68,9 +68,19 @@ passport.deserializeUser(async (id, done) => {
       done(null, user);
     })
     .catch((error) => {
-      done(error, null); 
+      done(error, null);
     });
 });
+
+router.get('/logout', (req, res) => {
+  req.session.destroy(error => {
+    if (error) {
+      console.log(error);
+    } else {
+      res.redirect('/')
+    }
+  });
+})
 
 
 
