@@ -34,7 +34,18 @@ router.get('/auth/google/callback',
 
 router.get('/login-failure',(req,res)=>{
   res.send('Error while logging in')
-})
+});
+
+passport.serializeUser((user,done)=>{
+  done(null,user);
+});
+
+passport.deserializeUser((id,done)=>{
+  User.FindById(id,(err,user)=>{
+    done(err,user);
+  })
+});
+
 
 
 

@@ -6,6 +6,7 @@ const path = require('path');
 const db = require('./controller/connection');
 const session = require('express-session');
 const passport = require('passport');
+const MongoStore = require('connect-mongo');
 
 
 const app = express();
@@ -15,6 +16,7 @@ db.connect();
 
 var userRouter = require('./routes/user');
 var authRouter = require('./routes/auth');
+const { Mongoose } = require('mongoose');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine','hbs');
@@ -27,7 +29,10 @@ app.use(express.static('public'))
 app.use(session({
     secret:'key',
     saveUninitialized:true,
-    resave:false
+    resave:false,
+    store:MongoStore.create({
+        mongoUrl: process.env.MONGO_URI
+    })
 }));
 
 app.use(passport.initialize());
