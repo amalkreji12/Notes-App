@@ -11,6 +11,14 @@ router.get('/dashboard',isLoggedIn,(req,res)=>{
     let user = req.user.firstName;
     
     res.render('user/dashboard',{user})
+});
+
+router.get('/dashboard/item/',isLoggedIn,(req,res)=>{
+    res.render('user/viewNotes')
+})
+
+router.get('/dashboard/add',isLoggedIn,(req,res)=>{
+    res.render('user/addnotes')
 })
 
 
