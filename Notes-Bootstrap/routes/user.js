@@ -8,7 +8,9 @@ router.get('/',(req,res)=>{
 })
 
 router.get('/dashboard',isLoggedIn,(req,res)=>{
-    res.render('user/dashboard',{user:true})
+    let user = req.user.firstName;
+    
+    res.render('user/dashboard',{user})
 })
 
 

@@ -1,1 +1,37 @@
-<h1>Dashbord</h1>
+<div class="container-fluid container-fluid-custom pb-5 mb-5">
+
+    <div class="row mn-4">
+
+        <div class="col">
+            <h1>Hey, Welcome {{user}}</h1>
+        </div>
+
+        <div class="col text-end">
+            <a href="/dashboard/add" class="btn btn-primary">Add Note</a>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-3 mb-4">
+
+            <div class="card border-primary" style="min-height: 210px;">
+                <a href="/dashboard/item/{{_id}}" class="card-body text-decoration-none">
+                    <h5 class="card-title">Title</h5>
+                    <p class="card-text"> Notes</p>
+                </a>
+            </div>
+
+            {{!-- <div class="row">
+                <div class="col-3">
+                    <img src="image" alt="image">
+                </div>
+            </div> --}}
+
+        </div>
+
+    </div>
+
+
+</div>
