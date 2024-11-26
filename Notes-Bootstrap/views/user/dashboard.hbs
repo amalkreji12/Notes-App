@@ -14,14 +14,16 @@
 
     <div class="row">
 
+         {{#each notes}}
         <div class="col-sm-3 mb-4">
-
+           
             <div class="card border-primary" style="min-height: 210px;">
                 <a href="/dashboard/item/{{_id}}" class="card-body text-decoration-none">
-                    <h5 class="card-title">Title</h5>
-                    <p class="card-text"> Notes</p>
+                    <h5 class="card-title">{{title}}</h5>
+                    <p class="card-text"> {{body}}</p>
                 </a>
             </div>
+            
 
             {{!-- <div class="row">
                 <div class="col-3">
@@ -30,6 +32,7 @@
             </div> --}}
 
         </div>
+        {{/each}}
 
     </div>
 

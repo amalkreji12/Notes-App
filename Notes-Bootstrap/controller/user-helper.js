@@ -12,7 +12,19 @@ module.exports = {
     },
 
     getAllNotes(userId){
-        
+        return new Promise(async(resolve,reject)=>{
+            try {
+                const notes = await Note.find({user :userId}).lean();
+                if(!notes){
+                    console.warn('No notes found')
+                }
+                resolve(notes); 
+            } catch (error) {
+                console.error('Error fetching notes:',error);
+                reject(error);
+            }
+            
+        })
     }
 
 

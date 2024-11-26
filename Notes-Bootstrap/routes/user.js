@@ -10,8 +10,16 @@ router.get('/',(req,res)=>{
 
 router.get('/dashboard',isLoggedIn,(req,res)=>{
     let user = req.user.firstName;
+    let userId = req.user.id;
+    userHelper.getAllNotes(userId).then((notes)=>{
+        // if(notes.length > 0){
+        //     console.log('notes get');
+        // }else{
+        //     console.log('no notes');
+        // }
+        res.render('user/dashboard',{user,notes});
+    })
     
-    res.render('user/dashboard',{user})
 });
 
 router.get('/dashboard/item/',isLoggedIn,(req,res)=>{
