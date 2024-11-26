@@ -38,9 +38,17 @@ router.post('/dashboard/add',(req,res)=>{
     userHelper.addNotes(req.body,userid).then((notes)=>{
         console.log('added notes')
         res.redirect('/dashboard')
-    })
-    
-})
+    });
+});
+
+router.post('/dashboard/item/update/:id',(req,res)=>{
+    let noteId = req.params.id;
+    let newNote = req.body;
+    userHelper.updateNoteById(noteId,newNote).then((response)=>{
+        console.log('note updated');
+        res.redirect('/dashboard');
+    });
+});
 
 
 

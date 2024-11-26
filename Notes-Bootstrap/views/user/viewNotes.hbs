@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <form action="" method="post" class="position-relative">
+    <form action="/dashboard/item/update/{{note._id}}" method="post" class="position-relative">
         <div class="form-group mb-4 position-absolute" style="left:1px; top:1px; right:1px;">
             <input type="text" class="form-control fw-bold border-0 fs-4" id="title" name="title" value="{{note.title}}"
                 placeholder="Title">
@@ -50,7 +50,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -58,8 +58,11 @@
                 <p>Note will be deleted <b class="fw-bold">Title</b></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Delete</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <form action="/dashboard/item/delete/{{note._id}}" method="post" class="position-relative}}">
+                    <button type="button" class="btn btn-primary">Delete</button>
+                </form>
+                
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
