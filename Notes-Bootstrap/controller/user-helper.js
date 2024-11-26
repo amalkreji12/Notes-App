@@ -25,6 +25,18 @@ module.exports = {
             }
             
         })
+    },
+
+    getNoteById(noteId){
+        return new Promise(async(resolve,reject)=>{
+            try {
+                const note = await Note.findById({_id:noteId}).lean();
+                resolve(note);
+            } catch (error) {
+                console.error('Error fetching notes:',error);
+                reject(error);
+            }
+        })
     }
 
 

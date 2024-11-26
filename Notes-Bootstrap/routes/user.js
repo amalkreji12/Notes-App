@@ -22,8 +22,11 @@ router.get('/dashboard',isLoggedIn,(req,res)=>{
     
 });
 
-router.get('/dashboard/item/',isLoggedIn,(req,res)=>{
-    res.render('user/viewNotes')
+router.get('/dashboard/item/:id',isLoggedIn,(req,res)=>{
+    let noteId = req.params.id;
+    userHelper.getNoteById(noteId).then((note)=>{
+        res.render('user/viewNotes',{note})
+    })
 })
 
 router.get('/dashboard/add',isLoggedIn,(req,res)=>{
