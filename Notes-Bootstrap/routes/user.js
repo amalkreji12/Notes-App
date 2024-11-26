@@ -51,6 +51,21 @@ router.post('/dashboard/item/update/:id',(req,res)=>{
 });
 
 
+router.post('/dashboard/item/delete/:id',(req,res)=>{
+    let noteId = req.params.id;
+    console.log(noteId);
+    
+    userHelper.deleteNoteById(noteId).then((response)=>{
+        if(response.deletedCount > 0){
+            console.log('note deleted');
+            res.redirect('/dashboard');
+        }else{
+            console.log('note not deleted');
+            res.status(500).send('note not deleted');
+        }; 
+    });
+});
+
 
 
 module.exports = router;

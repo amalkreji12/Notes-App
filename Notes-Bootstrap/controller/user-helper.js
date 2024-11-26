@@ -61,6 +61,20 @@ module.exports = {
     },
 
 
+    deleteNoteById(noteId){
+        return new Promise(async(resolve,reject)=>{
+            try {
+                let note = await Note.deleteOne({_id:noteId});
+                console.log(note);
+                resolve(note);
+            } catch (error) {
+                console.error('Error deleting notes:', error);
+                reject(error);
+            }
+        })
+    }
+
+
 
 
 

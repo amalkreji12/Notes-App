@@ -17,7 +17,8 @@
                 <h1 class="h3">View Note</h1>
 
                 <button type="button" class="btn btn-danger me-2" data-bs-toggle="modal" id="deleteButton"
-                    data-bs-target="#deleteModal">Delete</button>
+                    data-bs-target="#deleteModal">Delete
+                </button>
             </div>
         </div>
     </div>
@@ -49,19 +50,20 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Note will be deleted <b class="fw-bold">Title</b></p>
+                <p>Are you sure you want to delete the note: <b class="fw-bold">{{note.title}}</b></p>
             </div>
             <div class="modal-footer">
-                <form action="/dashboard/item/delete/{{note._id}}" method="post" class="position-relative}}">
-                    <button type="button" class="btn btn-primary">Delete</button>
+
+                <form action="/dashboard/item/delete/{{note._id}}" method="post" class="position-relative">
+                    <button type="submit" class="btn btn-primary">Delete</button>
                 </form>
-                
+
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
