@@ -11,13 +11,20 @@ router.get('/',(req,res)=>{
 router.get('/dashboard',isLoggedIn,(req,res)=>{
     let user = req.user.firstName;
     let userId = req.user.id;
+
+    const deleteNoteAlert = req.flash('successDelete')[0] || null;
+    const updateNoteAlert = req.flash('successUpdate')[0] || null;
+    const addNoteAlert = req.flash('successAdd')[0] || null;
+
+    const alertMessage = {deleteNoteAlert,updateNoteAlert,addNoteAlert}
+
     userHelper.getAllNotes(userId).then((notes)=>{
-        // if(notes.length > 0){
-        //     console.log('notes get');
-        // }else{
-        //     console.log('no notes');
-        // }
-        res.render('user/dashboard',{user,notes});
+        if(notes.length > 0){
+            res.render('user/dashboard',{user,notes,alertMessage});
+        }else{
+            console.log('no notes');
+        }
+        
     })
     
 });
@@ -36,7 +43,7 @@ router.get('/dashboard/add',isLoggedIn,(req,res)=>{
 router.post('/dashboard/add',(req,res)=>{
     let userid = req.user.id;
     userHelper.addNotes(req.body,userid).then((notes)=>{
-        console.log('added notes')
+        req.flash('successAdd','Note added successfully');
         res.redirect('/dashboard')
     });
 });
@@ -45,7 +52,7 @@ router.post('/dashboard/item/update/:id',(req,res)=>{
     let noteId = req.params.id;
     let newNote = req.body;
     userHelper.updateNoteById(noteId,newNote).then((response)=>{
-        console.log('note updated');
+        req.flash('successUpdate','Note updated successfully')
         res.redirect('/dashboard');
     });
 });
@@ -53,11 +60,10 @@ router.post('/dashboard/item/update/:id',(req,res)=>{
 
 router.post('/dashboard/item/delete/:id',(req,res)=>{
     let noteId = req.params.id;
-    console.log(noteId);
     
     userHelper.deleteNoteById(noteId).then((response)=>{
         if(response.deletedCount > 0){
-            console.log('note deleted');
+            req.flash('successDelete','Note deleted successfully');
             res.redirect('/dashboard');
         }else{
             console.log('note not deleted');

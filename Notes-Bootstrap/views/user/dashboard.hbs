@@ -1,7 +1,5 @@
 <div class="container-fluid container-fluid-custom pb-5 mb-5">
-
     <div class="row mn-4">
-
         <div class="col">
             <h1>Hey, Welcome {{user}}</h1>
         </div>
@@ -9,8 +7,25 @@
         <div class="col text-end">
             <a href="/dashboard/add" class="btn btn-primary">Add Note</a>
         </div>
-
     </div>
+
+    {{#if alertMessage.deleteNoteUpdate}}
+    <div class="alert alert-danger mt-2 text-center" id='success-alert' role="alert">
+        {{alertMessage.deleteNoteUpdate}}
+    </div>
+    {{/if}}
+
+    {{#if alertMessage.updateNoteAlert}}
+    <div class="alert alert-success mt-2 text-center" id='success-alert' role="alert">
+        {{alertMessage.updateNoteAlert}}
+    </div>
+    {{/if}}
+
+    {{#if alertMessage.addNoteAlert}}
+    <div class="alert alert-success mt-2 text-center" id='success-alert' role="alert">
+        {{alertMessage.addNoteAlert}}
+    </div>
+    {{/if}}
 
     <div class="row">
 
@@ -38,3 +53,7 @@
 
 
 </div>
+
+<script>
+    hideAlert('success-alert',3000);
+</script>

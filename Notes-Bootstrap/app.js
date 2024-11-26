@@ -7,6 +7,7 @@ const db = require('./controller/connection');
 const session = require('express-session');
 const passport = require('passport');
 const MongoStore = require('connect-mongo');
+const flash = require('express-flash');
 
 
 const app = express();
@@ -35,6 +36,7 @@ app.use(session({
     }),
     cookie : {maxAge:new Date(Date.now() + 3600000)}
 }));
+app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
