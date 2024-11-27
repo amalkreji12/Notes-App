@@ -19,12 +19,7 @@ router.get('/dashboard',isLoggedIn,(req,res)=>{
     const alertMessage = {deleteNoteAlert,updateNoteAlert,addNoteAlert}
 
     userHelper.getAllNotes(userId).then((notes)=>{
-        if(notes.length > 0){
-            res.render('user/dashboard',{user,notes,alertMessage});
-        }else{
-            console.log('no notes');
-        }
-        
+        res.render('user/dashboard',{user,notes,alertMessage});
     })
     
 });

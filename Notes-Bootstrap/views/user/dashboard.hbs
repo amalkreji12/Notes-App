@@ -29,31 +29,36 @@
 
     <div class="row">
 
-         {{#each notes}}
+        {{#if notes.length}}
+        {{#each notes}}
         <div class="col-sm-3 mb-4">
-           
+
             <div class="card border-primary" style="min-height: 210px;">
                 <a href="/dashboard/item/{{_id}}" class="card-body text-decoration-none">
                     <h5 class="card-title">{{title}}</h5>
                     <p class="card-text"> {{body}}</p>
                 </a>
             </div>
-            
-
-            {{!-- <div class="row">
+            {{/each}}
+            {{else}}
+            <div class="row">
                 <div class="col-3">
-                    <img src="image" alt="image">
+                    <img src="/images/create.png" alt="Person pointing pencil" style="height: 27rem; margin-top: 5rem;">
                 </div>
-            </div> --}}
 
+                <div class="col mt-md-4 " style="margin-left: 5rem;">
+                    <h2>No Notes Found !!</h2>
+                    <h4>It looks like you don't have any notes yet. <br> Start creating some! <br /><br />
+                        <a href="/dashboard/add">Create New</a>
+                    </h4>
+                </div>
+            </div>
         </div>
-        {{/each}}
-
+        {{/if}}
     </div>
-
 
 </div>
 
 <script>
-    hideAlert('success-alert',3000);
+    hideAlert('success-alert', 3000);
 </script>
