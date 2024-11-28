@@ -71,6 +71,26 @@ module.exports = {
                 reject(error);
             }
         })
+    },
+
+    getNotesToDashboard(userId){
+        return new Promise(async(resolve,reject)=>{
+            try {
+                const notes = await Note.aggregate([
+                    {$sort: {  createdAt :-1}},
+                    {$match: {user:new mongoose.Types.ObjectId(userId)}},
+                    {
+                        $project:{
+                            title: {$substr:["$title",0,30]},
+                            body:{$substr:["$body",0,100]},
+                        },
+                    }
+                ]);
+                resolve(notes);
+            } catch (error) {
+                reject(error);
+            }
+        })
     }
 
 

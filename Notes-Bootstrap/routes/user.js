@@ -16,12 +16,11 @@ router.get('/dashboard',isLoggedIn,(req,res)=>{
     const updateNoteAlert = req.flash('successUpdate')[0] || null;
     const addNoteAlert = req.flash('successAdd')[0] || null;
 
-    const alertMessage = {deleteNoteAlert,updateNoteAlert,addNoteAlert}
+    const alertMessage = {deleteNoteAlert,updateNoteAlert,addNoteAlert};
 
-    userHelper.getAllNotes(userId).then((notes)=>{
+    userHelper.getNotesToDashboard(userId).then((notes)=>{
         res.render('user/dashboard',{user,notes,alertMessage});
-    })
-    
+    }); 
 });
 
 router.get('/dashboard/item/:id',isLoggedIn,(req,res)=>{
