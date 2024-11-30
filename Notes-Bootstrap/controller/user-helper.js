@@ -46,7 +46,8 @@ module.exports = {
                     {
                         $set: {
                             title: newNote.title,
-                            body: newNote.body
+                            body: newNote.body,
+                            updatedAt: Date.now(),
                         },
                     },
                     { new: true }
@@ -77,7 +78,7 @@ module.exports = {
         return new Promise(async(resolve,reject)=>{
             try {
                 const notes = await Note.aggregate([
-                    {$sort: {  createdAt :-1}},
+                    {$sort: {  updatedAt :-1}},
                     {$match: {user:new mongoose.Types.ObjectId(userId)}},
                     {
                         $project:{
