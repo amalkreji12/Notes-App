@@ -1,0 +1,14 @@
+<div class="container-fluid container-fluid-custom pb-5 mb-5">
+    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+        {{#if notes.length}}
+            {{#each notes}}
+            <a href="/dashboard/item/{{this._id}}">
+                <h4>{{this.title}}</h4>
+            </a>
+            {{/each}}
+        {{else}}
+        <p>No Items found !</p>
+        {{/if}}
+    </div>
+</div>
+

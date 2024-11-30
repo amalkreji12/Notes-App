@@ -91,6 +91,26 @@ module.exports = {
                 reject(error);
             }
         })
+    },
+
+
+    searchNotesByUser(searchWord,userId){
+        return new Promise(async(resolve,reject)=>{
+            try {
+                let searchTerm = searchWord.replace(/[^a-zA-Z0-9]/g,'_');
+
+                const notes = await Note.find({
+                    $or :[
+                        {title:{$regex:new RegExp(searchTerm,"i")}},
+                        {body:{$regex:new RegExp(searchTerm,"i")}},
+                    ]
+                }).where({user:new mongoose.Types.ObjectId(userId)}).lean();
+                resolve(notes);
+            } catch (error) {
+                console.error('Error deleting notes:', error);
+                reject(error);
+            };
+        });
     }
 
 

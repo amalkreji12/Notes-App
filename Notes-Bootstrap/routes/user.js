@@ -66,6 +66,15 @@ router.post('/dashboard/item/delete/:id',(req,res)=>{
     });
 });
 
+router.post('/dashboard/search',(req,res)=>{
+    let searchTermName = req.body.searchTerm;
+    let userId = req.user.id;
+    userHelper.searchNotesByUser(searchTermName,userId).then((notes)=>{
+        res.render('user/search',{notes})
+    });
+})
+
+
 
 
 module.exports = router;
