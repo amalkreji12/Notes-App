@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/userModel');
+const userHelper = require('../controller/user-helper');
 
 
 passport.use(new GoogleStrategy({
@@ -14,7 +15,6 @@ passport.use(new GoogleStrategy({
     // User.findOrCreate({ googleId: profile.id }, function (err, user) {
     //   return cb(err, user);
     // });
-    //console.log(profile);
 
 
     const newUser = {
@@ -23,6 +23,7 @@ passport.use(new GoogleStrategy({
       lastName: profile.name.familyName,
       firstName: profile.name.givenName,
       profileImage: profile.photos[0].value,
+      email: profile.emails[0].value
     };
 
     try {
@@ -58,8 +59,26 @@ router.get('/login-failure', (req, res) => {
   res.send('Error while logging in')
 });
 
+router.get('/logout', (req, res) => {
+  req.session.destroy(error => {
+    if (error) {
+      console.log(error);
+    } else {
+      res.redirect('/')
+    }
+  });
+});
+
+router.post('/signup',(req,res)=>{
+  userHelper.doSignUp(req.body).then((response)=>{
+    console.log(response);
+    res.redirect('/dashboard');
+    
+  })
+});
+
 passport.serializeUser((user, done) => {
-  done(null, user);
+  done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
@@ -72,15 +91,7 @@ passport.deserializeUser(async (id, done) => {
     });
 });
 
-router.get('/logout', (req, res) => {
-  req.session.destroy(error => {
-    if (error) {
-      console.log(error);
-    } else {
-      res.redirect('/')
-    }
-  });
-})
+
 
 
 

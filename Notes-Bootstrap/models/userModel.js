@@ -4,7 +4,17 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     googleId : {
         type:String,
+        // required:true
+    },
+    email:{
+        type:String,
         required:true
+    },
+    password:{
+        type:String,
+    },
+    confirm_password:{
+        type:String,
     },
     displayName : {
         type:String,
@@ -12,15 +22,15 @@ const UserSchema = new Schema({
     },
     lastName : {
         type:String,
-        required:true
+        // required:true
     },
     firstName : {
         type:String,
-        required:true
+        // required:true
     },
     profileImage : {
         type:String,
-        required:true
+        // required:true
     },
     createdAt : {
         type:Date,

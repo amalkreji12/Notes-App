@@ -24,15 +24,18 @@
     <form action="/signup" method="POST">
       <div class="mb-3">
         <input type="email" name="email" class="form-control " placeholder="Email*" required 
-        style="background-color: #fff; border: 1px solid #ccc; padding: 10px; border-radius: 8px;">
+        style="padding: 10px;">
+
+        <input type="username" name="displayName" class="form-control mt-2" placeholder="Username*" required 
+        style="padding: 10px;">
 
         <input type="password" name="password" class="form-control mt-2" placeholder="Password*" required 
-        style="background-color: #fff; border: 1px solid #ccc; padding: 10px; border-radius: 8px;">
+        style="padding: 10px;">
 
         <input type="password" name="conf_password" class="form-control mt-2" placeholder="Confirm Password*" required 
-        style="background-color: #fff; border: 1px solid #ccc; padding: 10px; border-radius: 8px;">
+        style="padding: 10px;">
       </div>
-      <button type="submit" class="btn btn-primary w-100" style="background-color: var(--bs-primary-rgb); color: white; border: none; padding: 10px; font-family: 'Poppins', sans-serif; font-size: 1rem; border-radius: 8px;">Continue</button>
+      <button type="submit" class="btn btn-primary w-100" style="background-color: var(--bs-primary-rgb); color: white; ">Create</button>
     </form>
 
     <p class="text-center mt-3 small text-muted" style="font-family: 'Poppins', sans-serif; font-weight: 300;">

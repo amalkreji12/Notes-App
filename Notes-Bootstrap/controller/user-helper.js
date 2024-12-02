@@ -1,5 +1,7 @@
 const Note = require('../models/notesModel');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const User = require('../models/userModel');
 
 module.exports = {
 
@@ -112,6 +114,27 @@ module.exports = {
                 reject(error);
             };
         });
+    },
+
+
+    doSignUp(userData){
+        return new Promise(async(resolve,reject)=>{
+            try {
+                userData.password = await bcrypt.hash(userData.password,10);
+                userData.createdAt = new Date();
+                let isUserExist = await User.findOne({email:userData.email});
+                if(isUserExist){
+                    console.log('User already exists');
+                    resolve({status:false,userExists:true});
+                }else{
+                    let user = await User.create(userData);
+                    resolve(user);
+                }
+            } catch (error) {
+                console.error('Error deleting notes:', error);
+                reject(error);
+            }
+        })
     }
 
 
