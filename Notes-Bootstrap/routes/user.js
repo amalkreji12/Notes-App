@@ -72,7 +72,16 @@ router.post('/dashboard/search',(req,res)=>{
     userHelper.searchNotesByUser(searchTermName,userId).then((notes)=>{
         res.render('user/search',{notes})
     });
-})
+});
+
+
+router.get('/sign-up',(req,res)=>{
+res.render('user/sign-up',{isLoginSignupPage:true});
+});
+
+router.get('/login',(req,res)=>{
+    res.render('user/login',{isLoginSignupPage:true});
+});
 
 
 

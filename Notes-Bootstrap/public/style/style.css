@@ -28,15 +28,6 @@ h1,h2,h3,h4,h5,h6 {
     border-radius:2rem ;
 }
 
-/* @media (min-width:1200px){
-    .home {
-        background:
-        url('../images/human-1.svg') left bottom no-repeat,
-        url('../images/human-2.svg') right bottom no-repeat,
-        url('../images/noise-bg.png') left  no-repeat,
-        var(--background-color);
-    }
-} */
 
 .home-title::before{
     content: url('../images/stars.svg');
