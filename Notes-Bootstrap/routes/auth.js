@@ -71,11 +71,27 @@ router.get('/logout', (req, res) => {
 
 router.post('/signup',(req,res)=>{
   userHelper.doSignUp(req.body).then((response)=>{
-    console.log(response);
+    //console.log(response);
+    req.session.user = {
+      id: response._id,
+      email: response.email,
+      name: response.displayName
+    };
     res.redirect('/dashboard');
     
   })
 });
+
+router.post('/login',(req,res)=>{
+  userHelper.doLogin(req.body).then((response)=>{
+    req.session.user = {
+      id: response._id,
+      email: response.email,
+      name: response.displayName
+    };
+    res.redirect('/dashboard');
+  })
+})
 
 passport.serializeUser((user, done) => {
   done(null, user.id);

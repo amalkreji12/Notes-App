@@ -135,6 +135,36 @@ module.exports = {
                 reject(error);
             }
         })
+    },
+
+    doLogin(userData){
+        return new Promise(async(resolve,reject)=>{
+            try {
+                let loginStatus = false;
+                let response = {};
+                let user = await User.findOne({email:userData.email});
+                if(user){
+                    bcrypt.compare(userData.password,user.password).then((status)=>{
+                        if(status){
+                            console.log('login successful');
+                            response.user = user
+                            response.status= true;
+                            resolve(response);
+                        }else{
+                            console.log('login failed');
+                            resolve({status:false});
+                        }
+                    })
+                }else{
+                    console.log('User not found');
+                    resolve({status:false,emailNotFound:true});
+                    
+                }
+            } catch (error) {
+                console.error('Error deleting notes:', error);
+                reject(error);
+            }
+        })
     }
 
 
