@@ -69,8 +69,8 @@ router.get('/logout', (req, res) => {
   });
 });
 
-router.post('/signup',(req,res)=>{
-  userHelper.doSignUp(req.body).then((response)=>{
+router.post('/signup', (req, res) => {
+  userHelper.doSignUp(req.body).then((response) => {
     //console.log(response);
     req.session.user = {
       id: response._id,
@@ -78,19 +78,31 @@ router.post('/signup',(req,res)=>{
       name: response.displayName
     };
     res.redirect('/dashboard');
-    
+
   })
 });
 
-router.post('/login',(req,res)=>{
-  userHelper.doLogin(req.body).then((response)=>{
-    req.session.user = {
-      id: response._id,
-      email: response.email,
-      name: response.displayName
-    };
-    res.redirect('/dashboard');
-  })
+router.post('/login', (req, res) => {
+  try {
+    const response = userHelper.doLogin(req.body).then((response) => {
+      if (response.status) {
+        req.session.user = {
+          id: response.user._id,
+          email: response.user.email,
+          firstName: response.user.displayName
+        };
+        //console.log(req.session.user);
+        res.redirect('/dashboard');
+      } else {
+        res.redirect('/login')
+      }
+    });
+    
+  } catch (error) {
+    console.error('Login error:', error);
+    res.redirect('/login');
+  }
+
 })
 
 passport.serializeUser((user, done) => {
