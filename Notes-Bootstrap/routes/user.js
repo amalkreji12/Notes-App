@@ -9,11 +9,11 @@ router.get('/',(req,res)=>{
 })
 
 router.get('/dashboard',isLoggedIn,(req,res)=>{
-    //let user = req.user.firstName;
-    //let userId = req.user.id;
-    let user = res.locals.user 
-    let userId = res.locals.user.id;
-    console.log('user :',user)
+    let user = req.user.firstName;
+    let userId = req.user.id;
+    // let user = res.locals.user 
+    // let userId = res.locals.user.id;
+    // console.log('user :',user)
 
     const deleteNoteAlert = req.flash('successDelete')[0] || null;
     const updateNoteAlert = req.flash('successUpdate')[0] || null;

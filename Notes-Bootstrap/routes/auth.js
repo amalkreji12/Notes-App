@@ -27,7 +27,7 @@ passport.use(new GoogleStrategy({
     };
 
     try {
-      let user = await User.findOne({ googleId: profile.id });
+      let user = await User.findOne({ googleId: profile.id }).lean();
       if (user) {
         done(null, user);
       } else {
